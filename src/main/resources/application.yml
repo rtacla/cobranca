@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: Cobranca
+  messages:
+    encoding: UTF-8
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/cobranca
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL9Dialect
+        format_sql: true
+        temp:
+          use_jdbc_metadata_defaults: false
+    show-sql: true
+      
+jwt:
+  authorization:
+    secret: 1923810238uoweyroiqwer89183123b1vbavsd
+server:
+  port: 8080
+  
