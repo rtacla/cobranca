@@ -1,6 +1,7 @@
 package br.com.itau.cobranca.interceptor;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +28,7 @@ public class JwtInterceptor implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		this.validaJwt(request);
+		this.checkJwt(request);
 		return true;
 	}
 
@@ -37,11 +38,13 @@ public class JwtInterceptor implements HandlerInterceptor {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {}
 
-	private void validaJwt(HttpServletRequest request) throws UnsupportedEncodingException {
+	private void checkJwt(HttpServletRequest request) throws UnsupportedEncodingException {
 		String jwtHeader = request.getHeader("Authorization");
-		if(jwtHeader.isEmpty()) {
+		if(jwtHeader==null || jwtHeader.isEmpty()) {
 			throw new CobrancaException("Autenticacao Requerida");
 		}
+		
+		jwtHeader = jwtHeader.replace("Bearer ", "");
 
 		Algorithm algorithmHS = Algorithm.HMAC256(jwtSecret);
 		JWTVerifier verifier = JWT.require(algorithmHS).withIssuer(ISSUER).build();

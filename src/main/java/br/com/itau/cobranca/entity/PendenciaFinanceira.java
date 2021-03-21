@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "PENDENCIA_FINANCEIRA")
+@Table(name = "PENDENCIA_PENDENCIA")
 public class PendenciaFinanceira {
 	
 	@Id

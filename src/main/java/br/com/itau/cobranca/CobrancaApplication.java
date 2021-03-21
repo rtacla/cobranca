@@ -3,8 +3,9 @@ package br.com.itau.cobranca;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.server.WebServerFactoryCustomizer;
+import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
-import org.modelmapper.ModelMapper;
 
 
 @SpringBootApplication
@@ -15,10 +16,9 @@ public class CobrancaApplication {
 		SpringApplication.run(CobrancaApplication.class, args);
 	}
 	
-	@Bean
-	public ModelMapper modelMapper() {
-	    return new ModelMapper();
-	}
+    @Bean
+    public WebServerFactoryCustomizer< ConfigurableServletWebServerFactory > webServerFactoryCustomizer() {
+        return factory -> factory.setContextPath( "/cobranca" );
+    }
 	
-
 }

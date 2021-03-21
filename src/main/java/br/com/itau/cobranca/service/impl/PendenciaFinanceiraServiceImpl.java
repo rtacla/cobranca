@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.itau.cobranca.dto.FiltroPendenciaFinanceiraAgrupadoDTO;
 import br.com.itau.cobranca.dto.FiltroPendenciaFinanceiraDTO;
 import br.com.itau.cobranca.dto.PendenciaFinanceiraDTO;
 import br.com.itau.cobranca.entity.PendenciaFinanceira;
@@ -28,6 +29,9 @@ public class PendenciaFinanceiraServiceImpl implements PendenciaFinanceiraServic
 	public PendenciaFinanceiraDTO buscaPorCPFDocto(FiltroPendenciaFinanceiraDTO filtro) {
 		try {
 			PendenciaFinanceira pendencia = pendenciaFinanceiraRepository.buscaPendenciaPorCPFDocto(filtro.getCpf(), filtro.getDocumento());
+			if(pendencia==null) {
+				throw new CobrancaException("Não foi encontrado registro para este CPF e Documento");
+			}
 			PendenciaFinanceiraDTO pendenciaDTO = mapeadorUtil.convertoPendenciaToDto(pendencia);
 			return pendenciaDTO; 
 		} catch (Exception ex) {
@@ -36,9 +40,12 @@ public class PendenciaFinanceiraServiceImpl implements PendenciaFinanceiraServic
 	}
 
 	@Override
-	public List<PendenciaFinanceiraDTO> buscaPorCPF(FiltroPendenciaFinanceiraDTO filtro) {
+	public List<PendenciaFinanceiraDTO> buscaPorCPF(FiltroPendenciaFinanceiraAgrupadoDTO filtro) {
 		try {
 			List<PendenciaFinanceira> pendencias = pendenciaFinanceiraRepository.buscaPendenciaPorCPF(filtro.getCpf());
+			if(pendencias==null) {
+				throw new CobrancaException("Não foram encontrados registros para este CPF");
+			}
 			List<PendenciaFinanceiraDTO> pendenciasDTO = pendencias.stream().map(pend -> mapeadorUtil.convertoPendenciaToDto(pend)).collect(Collectors.toList());
 			return pendenciasDTO; 
 		} catch (Exception ex) {

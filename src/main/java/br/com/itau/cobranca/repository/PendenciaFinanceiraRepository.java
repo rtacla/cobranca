@@ -12,7 +12,7 @@ public interface PendenciaFinanceiraRepository extends JpaRepository<PendenciaFi
 	@Query("select pf from PendenciaFinanceira pf where pf.cpf = ?1")
 	List<PendenciaFinanceira> buscaPendenciaPorCPF(String cpf);
 	
-	@Query("select pf from PendenciaFinanceira pf where pf.cpf = ?1 and pf.documento ?2")
+	@Query("select pf from PendenciaFinanceira pf where pf.cpf = ?1 and pf.documento = ?2")
 	PendenciaFinanceira buscaPendenciaPorCPFDocto(String cpf, String documento);
 
 

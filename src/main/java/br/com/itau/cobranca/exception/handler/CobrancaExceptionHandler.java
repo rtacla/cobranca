@@ -12,6 +12,6 @@ import br.com.itau.cobranca.exception.CobrancaException;
 public class CobrancaExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler( CobrancaException.class )
 	public ResponseEntity< String > handle( CobrancaException e ) throws Exception {
-		return new ResponseEntity<>( e.getMensagem(), HttpStatus.BAD_REQUEST );
+		return new ResponseEntity<>( "{ \"mensagem\": \"" + e.getMensagem() + "\"}", HttpStatus.BAD_REQUEST );
 	}
 }
