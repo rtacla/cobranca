@@ -1,8 +1,15 @@
 **Projeto Cobranca**
 
+Java 8 com Spring Boot
+Frameworks:
+  Lombok
+  Spring Data
+  Swagger
+
+
 Para criar base dados execute no Docker:
 
-ˋˋˋ
+```
 docker run -p 5432:5432 --name cobranca -e POSTGRES_PASSWORD=postgres -d postgres
 
 docker exec -it cobranca psql -U postgres -w postgres  -c "CREATE DATABASE cobranca;"
@@ -13,7 +20,7 @@ docker exec -it cobranca bash
 
 psql -U postgres -d cobranca -f pendencia_financeira.sql;
 
-ˋˋˋ
+```
 
 Para gerar um Bearer para chamadas na aplicação, execute a classe JwtGeneratorTest.java como JUNIT.
 Após executar a classe copie do Console o Json Web Token gerado.
