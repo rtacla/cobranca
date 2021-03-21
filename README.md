@@ -1,5 +1,12 @@
 **Projeto Cobranca**
 
+Java 8 com Spring Boot
+Frameworks:
+  Lombok
+  Spring Data
+  Swagger
+
+
 Para criar base dados execute no Docker:
 
 ```
