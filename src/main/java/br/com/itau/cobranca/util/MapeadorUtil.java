@@ -1,5 +1,7 @@
 package br.com.itau.cobranca.util;
 
+import java.math.RoundingMode;
+
 import org.springframework.stereotype.Component;
 
 import br.com.itau.cobranca.dto.PendenciaFinanceiraDTO;
@@ -12,7 +14,7 @@ public class MapeadorUtil {
 		return PendenciaFinanceiraDTO.builder()
 				.cpf(pend.getCpf())
 				.documento(pend.getDocumento())
-				.valorOriginal(pend.getValorOriginal())
+				.valorOriginal(pend.getValorOriginal().setScale(2, RoundingMode.HALF_DOWN) )
 				.dataPendencia(pend.getDataPendencia())
 				.cnpjCpfOrigemPendencia(pend.getCnpjCpfOrigemPendencia())
 				.codigoCliente(pend.getCodigoCliente())

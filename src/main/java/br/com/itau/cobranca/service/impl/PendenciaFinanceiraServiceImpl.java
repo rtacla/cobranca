@@ -33,7 +33,9 @@ public class PendenciaFinanceiraServiceImpl implements PendenciaFinanceiraServic
 				throw new CobrancaException("Não foi encontrado registro para este CPF e Documento");
 			}
 			PendenciaFinanceiraDTO pendenciaDTO = mapeadorUtil.convertoPendenciaToDto(pendencia);
-			return pendenciaDTO; 
+			return pendenciaDTO;
+		} catch (CobrancaException ce) {
+			throw ce;
 		} catch (Exception ex) {
 			throw new CobrancaException("Erro na consulta de Pendencia Financeira por CPF e Documento");
 		}
@@ -43,11 +45,13 @@ public class PendenciaFinanceiraServiceImpl implements PendenciaFinanceiraServic
 	public List<PendenciaFinanceiraDTO> buscaPorCPF(FiltroPendenciaFinanceiraAgrupadoDTO filtro) {
 		try {
 			List<PendenciaFinanceira> pendencias = pendenciaFinanceiraRepository.buscaPendenciaPorCPF(filtro.getCpf());
-			if(pendencias==null) {
+			if(pendencias==null || pendencias.size()==0) {
 				throw new CobrancaException("Não foram encontrados registros para este CPF");
 			}
 			List<PendenciaFinanceiraDTO> pendenciasDTO = pendencias.stream().map(pend -> mapeadorUtil.convertoPendenciaToDto(pend)).collect(Collectors.toList());
-			return pendenciasDTO; 
+			return pendenciasDTO;
+		} catch (CobrancaException ce) {
+			throw ce;
 		} catch (Exception ex) {
 			throw new CobrancaException("Erro na consulta de Pendencia Financeira por CPF");
 		}

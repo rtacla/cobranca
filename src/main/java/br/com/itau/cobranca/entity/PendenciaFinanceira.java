@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "PENDENCIA_PENDENCIA")
+@Table(name = "PENDENCIA_FINANCEIRA")
 public class PendenciaFinanceira {
 	
 	@Id
@@ -35,8 +35,10 @@ public class PendenciaFinanceira {
 	
 	private BigDecimal valorOriginal;
 	
+	@Column(name = "DT_PENDENCIA")
 	private LocalDate dataPendencia;
 	
+	@Column(name = "CNPJCPF_ORIGEM_PENDENCIA")
 	private String cnpjCpfOrigemPendencia;
 	
 	private Long codigoCliente;
