@@ -14,6 +14,8 @@ docker run -p 5432:5432 --name cobranca -e POSTGRES_PASSWORD=postgres -d postgre
 
 docker exec -it cobranca psql -U postgres -w postgres  -c "CREATE DATABASE cobranca;"
 
+docker cp "pendencia.sql" cobranca:/
+
 docker exec -it cobranca bash
 
 psql -U postgres -d cobranca -f pendencia.sql;
