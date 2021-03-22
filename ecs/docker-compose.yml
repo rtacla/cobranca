@@ -1,0 +1,26 @@
+version: "3"
+services:
+  cobranca-service:
+    image: #{ECR_NAME}#:#{BUILD_NUMBER}#
+    environment:
+      - SERVER_PORT=8080
+      - INFO_ENVIROMENT=#{ENVIRONMENT}#
+      - SPRING_PROFILES_ACTIVE=#{ENVIRONMENT}#
+      - CPU_LIMIT=#{CPU_LIMIT}#
+      - MEMORY_LIMIT=#{MEMORY_LIMIT}#
+    working_dir: /app
+    deploy:
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "8080"
+    networks:
+      - webnet
+    logging:
+      driver: awslogs
+      options: 
+        awslogs-group: #{LOG_SPACE}##{ENVIRONMENT}#/cobranca-service
+        awslogs-region: sa-east-1
+        awslogs-stream-prefix: #{ENVIRONMENT}#/cobranca-service
+networks:
+  webnet:

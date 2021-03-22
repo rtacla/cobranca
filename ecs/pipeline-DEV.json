@@ -1,0 +1,9 @@
+{
+  "ECS_TARGET_GROUP": "CobrancaTargetGroup",
+  "SERVICE_NAME": "cobranca-service",
+  "CONTAINER_PORT": "8080",
+  "CONTAINER_NAME": "cobranca-service",
+  "CLOUDFORMATION_STACK": "ClusterEcsDev",
+  "DESIRED_TASKS": "1",
+  "MAX_TASKS": "1"
+}

@@ -1,0 +1,5 @@
+FROM openjdk8:8-jre-alpine3.7
+COPY ecs/app/app.jar /app/app.jar
+WORKDIR /all
+ENTRYPOINT java -javar /app/app.jar
+EXPOSE 8080

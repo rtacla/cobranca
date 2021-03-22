@@ -1,0 +1,18 @@
+version: 1
+task_definition:
+  ecs_network_mode: bridge
+  task_role_arn: #{ROLE_ARN}#
+  task_execution_role: #{EXECUTION_ROLE}#
+  task_size:
+    cpu_limit: #{CPU_LIMIT}#
+    mem_limit: #{MEMORY_LIMIT}#
+  services:
+    produto-service:
+      essential: true
+      cpu_shares: #{CPU_SHARES}#
+      mem_limit: #{MEMORY_LIMIT}#M
+      secrets:
+        - value_from: /#{ENVIRONMENT}#/JWT_AUTHORIZATION_SECRET
+          name: JWT_AUTHORIZATION_SECRET
+        - value_from: /#{ENVIRONMENT}#/DB_PASSWORD
+          name: SPRING_DATASOURCE_PASSWORD
